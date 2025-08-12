@@ -20,6 +20,6 @@ from accounts.views import signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('', signup, name='home'),
     path('signup/', signup, name='signup'),
-    path('', signup, name='home'),  # Стартовая страница
 ]
