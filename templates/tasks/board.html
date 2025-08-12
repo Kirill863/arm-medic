@@ -1,0 +1,14 @@
+<div class="board">
+    {% for status in statuses %}
+        <div class="column">
+            <h3>{{ status.1 }}</h3>
+            {% for task in tasks %}
+                {% if task.status == status.0 %}
+                    <div class="task" draggable="true">
+                        {{ task.title }} ({{ task.patient.name }})
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+    {% endfor %}
+</div>
