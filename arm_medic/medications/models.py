@@ -9,3 +9,15 @@ class Medication(models.Model):
 
     def __str__(self):
         return f"{self.name} ({self.dosage})"
+    
+from django.db import models
+from core.models import User
+
+class Medication(models.Model):
+    name = models.CharField(max_length=100)
+    responsible_nurse = models.ForeignKey(
+        User, 
+        on_delete=models.SET_NULL,
+        null=True,
+        limit_choices_to={'role': 'nurse'}
+    )
