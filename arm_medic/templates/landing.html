@@ -31,17 +31,22 @@
         <p class="lead">Профессиональная медицинская помощь</p>
     </section>
 
+<div class="container mt-4">
     <!-- Врачи -->
     <h2 class="mb-4">Наши специалисты</h2>
     <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
         {% for doctor in doctors %}
         <div class="col">
             <div class="card h-100">
-                <img src="{% static 'img/'|add:doctor.photo %}" 
-                    class="card-img-top" alt="{{ doctor.name }}">
+                {% if doctor.photo %}
+                <img src="{{ doctor.photo.url }}" class="card-img-top" alt="{{ doctor.name }}">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ doctor.name }}</h5>
                     <p class="card-text">{{ doctor.specialty }}, стаж {{ doctor.experience }}</p>
+                    {% if doctor.qualification %}
+                    <p class="card-text"><small class="text-muted">{{ doctor.qualification }}</small></p>
+                    {% endif %}
                 </div>
             </div>
         </div>
@@ -54,8 +59,9 @@
         {% for nurse in nurses %}
         <div class="col">
             <div class="card h-100">
-                <img src="{% static 'img/'|add:nurse.photo %}" 
-                    class="card-img-top" alt="{{ nurse.name }}">
+                {% if nurse.photo %}
+                <img src="{{ nurse.photo.url }}" class="card-img-top" alt="{{ nurse.name }}">
+                {% endif %}
                 <div class="card-body">
                     <h5 class="card-title">{{ nurse.name }}</h5>
                     <p class="card-text">{{ nurse.position }}, стаж {{ nurse.experience }}</p>
@@ -67,9 +73,21 @@
 
     <!-- Услуги -->
     <h2 class="mb-4">Услуги</h2>
-    <div class="list-group mb-5">
+    <div class="row">
         {% for service in services %}
-        <div class="list-group-item">{{ service }}</div>
+        <div class="col-md-4 mb-4">
+            <div class="card">
+                <div class="card-body">
+                    {% if service.icon %}
+                    <i class="{{ service.icon }} fa-2x mb-3"></i>
+                    {% endif %}
+                    <h5 class="card-title">{{ service.name }}</h5>
+                    {% if service.description %}
+                    <p class="card-text">{{ service.description }}</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
         {% endfor %}
     </div>
 </div>

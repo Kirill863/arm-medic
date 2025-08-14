@@ -24,3 +24,11 @@ class Prescription(models.Model):
 
     def __str__(self):
         return f"{self.medication.name} для {self.patient.full_name}"
+    
+class Service(models.Model):
+    name = models.CharField(max_length=200)
+    description = models.TextField(blank=True)
+    icon = models.CharField(max_length=50, blank=True)  # Для иконок Font Awesome
+    
+    def __str__(self):
+        return self.name
