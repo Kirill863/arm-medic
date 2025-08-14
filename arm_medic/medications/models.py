@@ -3,7 +3,7 @@ from core.models import User  # Импортируем модель User из п
 
 class Medication(models.Model):
     name = models.CharField("Название", max_length=100)
-    dosage = models.CharField("Дозировка", max_length=50)
+    dosage = models.CharField('Дозировка', max_length=100, null=True, blank=True) 
     stock = models.IntegerField("Остаток")
     critical_level = models.IntegerField("Критический остаток", default=10)
     responsible_nurse = models.ForeignKey(

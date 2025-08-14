@@ -30,6 +30,7 @@ class User(AbstractUser):
         verbose_name='user permissions',
         help_text='Specific permissions for this user.',
     )
-
+    phone = models.CharField(max_length=20, null=True, blank=True)
+    
     class Meta:
         db_table = 'core_user'

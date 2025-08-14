@@ -4,7 +4,8 @@ from core.models import User  # Импортируем кастомную мод
 
 class SignUpForm(UserCreationForm):
     role = forms.ChoiceField(choices=User.ROLES)  # Теперь ROLES доступен
+    phone = forms.CharField(max_length=20, required=True, label="Телефон")
     
     class Meta:
         model = User
-        fields = ('username', 'password1', 'password2', 'role')
+        fields = ("username", "phone", "password1", "password2", "role")
