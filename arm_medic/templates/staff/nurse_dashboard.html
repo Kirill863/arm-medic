@@ -1,0 +1,40 @@
+<!-- templates/nurse_dashboard.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Мои назначения</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Пациент</th>
+            <th>Лекарство</th>
+            <th>Дозировка</th>
+            <th>Время приема</th>
+            <th>Статус</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for prescription in prescriptions %}
+        <tr>
+            <td>{{ prescription.patient.full_name }}</td>
+            <td>{{ prescription.medication.name }}</td>
+            <td>{{ prescription.dosage }}</td>
+            <td>{{ prescription.time|date:"H:i" }}</td>
+            <td>
+                <span class="badge bg-{% if prescription.completed %}success{% else %}warning{% endif %}">
+                    {% if prescription.completed %}Выполнено{% else %}Ожидает{% endif %}
+                </span>
+            </td>
+            <td>
+                {% if not prescription.completed %}
+                <a href="{% url 'complete_prescription' prescription.id %}" class="btn btn-sm btn-primary">
+                    Отметить выполненным
+                </a>
+                {% endif %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

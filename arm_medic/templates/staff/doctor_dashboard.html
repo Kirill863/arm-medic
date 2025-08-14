@@ -1,0 +1,30 @@
+<!-- templates/doctor_dashboard.html -->
+{% extends "base.html" %}
+
+{% block content %}
+<h2>Пациенты</h2>
+<table class="table">
+    <thead>
+        <tr>
+            <th>ФИО</th>
+            <th>Дата рождения</th>
+            <th>Диагноз</th>
+            <th>Действия</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for patient in patients %}
+        <tr>
+            <td>{{ patient.full_name }}</td>
+            <td>{{ patient.birth_date|date:"d.m.Y" }}</td>
+            <td>{{ patient.diagnosis }}</td>
+            <td>
+                <a href="{% url 'create_prescription' patient.id %}" class="btn btn-success">
+                    <i class="fas fa-plus"></i> Новое назначение
+                </a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
