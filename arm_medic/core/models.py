@@ -1,17 +1,35 @@
-from django.db import models
-
-# Create your models here.
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 class User(AbstractUser):
+    # Добавляем выбор ролей
     ROLES = (
+        ('doctor', 'Доктор'),
         ('nurse', 'Медсестра'),
-        ('doctor', 'Врач'),
         ('admin', 'Администратор'),
     )
-    role = models.CharField(max_length=10, choices=ROLES, default='nurse')
-    phone = models.CharField(max_length=15, blank=True)
+    
+    role = models.CharField(
+        max_length=10,
+        choices=ROLES,
+        default='doctor',
+        verbose_name='Роль'
+    )
+    
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='core_user_set',
+        blank=True,
+        verbose_name='groups',
+        help_text='The groups this user belongs to.',
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='core_user_set',
+        blank=True,
+        verbose_name='user permissions',
+        help_text='Specific permissions for this user.',
+    )
 
-    def __str__(self):
-        return f"{self.get_full_name()} ({self.role})"
+    class Meta:
+        db_table = 'core_user'
