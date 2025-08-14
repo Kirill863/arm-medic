@@ -1,8 +1,8 @@
 from django.contrib import admin
-
-# Register your models here.
-from django.contrib import admin
 from .models import Medication
 
-# Убедитесь, что нет дублирования этой строки
-admin.site.register(Medication)
+@admin.register(Medication)
+class MedicationAdmin(admin.ModelAdmin):
+    list_display = ('name', 'dosage', 'stock', 'critical_level', 'responsible_nurse')
+    list_filter = ('responsible_nurse',)
+    search_fields = ('name', 'dosage')
