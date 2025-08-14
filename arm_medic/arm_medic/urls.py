@@ -20,6 +20,7 @@ from accounts.views import signup
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', signup, name='home'),
+    path('', user_login, name='home'),  # Теперь главная страница — вход
     path('signup/', signup, name='signup'),
+    path('login/', user_login, name='login'),
 ]
