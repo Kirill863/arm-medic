@@ -1,5 +1,5 @@
 from django.db import models
-from core.models import User  # Импортируем модель User из приложения core
+from accounts.models import User
 
 class Medication(models.Model):
     name = models.CharField("Название", max_length=100)
