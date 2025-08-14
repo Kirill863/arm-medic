@@ -16,6 +16,7 @@ urlpatterns = [
     path('', landing, name='landing'),
     path('signup/', accounts_views.signup, name='signup'),
     path('login/', accounts_views.user_login, name='login'),
+    path('logout/', accounts_views.user_logout, name='logout'),
     
     path('doctor/', staff_views.doctor_dashboard, name='doctor_dashboard'),
     path('nurse/', staff_views.nurse_dashboard, name='nurse_dashboard'),

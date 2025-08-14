@@ -1,28 +1,53 @@
-<!-- templates/accounts/login.html -->
 {% extends "base.html" %}
 
 {% block content %}
-<h2>Вход</h2>
-<form method="post">
-    {% csrf_token %}
-    <div>
-        <label for="username">Имя пользователя:</label>
-        <input type="text" name="username" id="username" required>
+<div class="container mt-4">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">
+                    <h2 class="text-center">Вход в систему</h2>
+                </div>
+                <div class="card-body">
+                    {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }} alert-dismissible fade show">
+                            {{ message }}
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        {% endfor %}
+                    {% endif %}
+
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="username">Логин:</label>
+                            <input type="text" name="username" id="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Пароль:</label>
+                            <input type="password" name="password" id="password" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="role">Роль:</label>
+                            <select name="role" id="role" class="form-control" required>
+                                <option value="" selected disabled>Выберите роль</option>
+                                <option value="doctor">Доктор</option>
+                                <option value="nurse">Медсестра</option>
+                                <option value="admin">Администратор</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-block">Войти</button>
+                    </form>
+
+                    <div class="text-center mt-3">
+                        <p>Еще нет аккаунта? <a href="{% url 'signup' %}">Зарегистрируйтесь</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div>
-        <label for="password">Пароль:</label>
-        <input type="password" name="password" id="password" required>
-    </div>
-    <div>
-        <label for="role">Роль:</label>
-        <select name="role" id="role" required>
-            <option value="">-- Выберите роль --</option>
-            <option value="doctor">Врач</option>
-            <option value="nurse">Медсестра</option>
-            <option value="admin">Администратор</option>
-        </select>
-    </div>
-    <button type="submit">Войти</button>
-</form>
-<p>Ещё нет аккаунта? <a href="{% url 'signup' %}">Зарегистрироваться</a></p>
+</div>
 {% endblock %}
