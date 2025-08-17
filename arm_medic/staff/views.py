@@ -64,3 +64,6 @@ def nurse_dashboard(request):
         'current_nurse': current_nurse
     }
     return render(request, 'staff/nurse_dashboard.html', context)
+
+def access_denied(request):
+    return render(request, 'staff/access_denied.html')

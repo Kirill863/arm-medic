@@ -30,6 +30,7 @@ urlpatterns = [
     path('prescription/complete/<int:prescription_id>/', 
         prescriptions_views.complete_prescription, 
         name='complete_prescription'),
+    path('access-denied/', staff_views.access_denied, name='access_denied'),
 ]
 
 if settings.DEBUG:
