@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3 class="text-center">Выберите время приема</h3>
+                </div>
+                <div class="card-body">
+                    <h4 class="text-center mb-4">
+                        {{ appointment_data.get_specialist_display }}<br>
+                        {{ appointment_data.date|date:"d.m.Y" }}
+                    </h4>
+                    
+                    <form method="post">
+                        {% csrf_token %}
+                        <div class="row">
+                            {% for time in available_times %}
+                            <div class="col-md-4 mb-3">
+                                <button type="submit" name="time" value="{{ time }}" 
+                                        class="btn btn-outline-primary w-100 py-3">
+                                    {{ time }}
+                                </button>
+                            </div>
+                            {% empty %}
+                            <div class="col-12 text-center">
+                                <div class="alert alert-warning">
+                                    Нет доступных временных слотов на выбранную дату
+                                </div>
+                                <a href="{% url 'appointment' %}" class="btn btn-secondary">
+                                    Выбрать другую дату
+                                </a>
+                            </div>
+                            {% endfor %}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

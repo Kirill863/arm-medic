@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header bg-success text-white">
+                    <h3 class="text-center">Запись успешно создана!</h3>
+                </div>
+                <div class="card-body text-center">
+                    <p>Ваша запись на прием была успешно создана.</p>
+                    <p>Мы свяжемся с вами для подтверждения.</p>
+                    <a href="{% url 'home' %}" class="btn btn-primary">
+                        Вернуться на главную
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
