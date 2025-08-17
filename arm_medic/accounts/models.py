@@ -7,6 +7,7 @@ class User(AbstractUser):
         ('doctor', 'Доктор'),
         ('nurse', 'Медсестра'),
         ('admin', 'Администратор'),
+        ('patient', 'Пациент'),  # Добавляем роль пациента
     )
     
     phone = models.CharField(

@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Личный кабинет пациента</h2>
+    
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Моя информация</h5>
+                    <p><strong>ФИО:</strong> {{ user.get_full_name }}</p>
+                    <p><strong>Дата рождения:</strong> {{ user.patient.birth_date }}</p>
+                    <p><strong>Группа крови:</strong> {{ user.patient.get_blood_type_display }}</p>
+                    <a href="#" class="btn btn-outline-primary btn-sm">Редактировать</a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col-md-8">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <h5 class="card-title">Мои записи</h5>
+                    <div class="list-group">
+                        {% for app in appointments %}
+                        <a href="#" class="list-group-item list-group-item-action">
+                            {{ app.date }} - {{ app.doctor.name }} ({{ app.doctor.specialty }})
+                            <span class="badge bg-{% if app.completed %}success{% else %}warning{% endif %} float-end">
+                                {% if app.completed %}Завершен{% else %}Запланирован{% endif %}
+                            </span>
+                        </a>
+                        {% empty %}
+                        <div class="list-group-item">Нет записей</div>
+                        {% endfor %}
+                    </div>
+                    <a href="{% url 'patient_appointments' %}" class="btn btn-primary mt-3">Записаться на прием</a>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Результаты анализов</h5>
+                    <div class="list-group">
+                        {% for result in results %}
+                        <a href="#" class="list-group-item list-group-item-action">
+                            {{ result.test_name }} ({{ result.date }})
+                            <span class="badge bg-info float-end">Просмотреть</span>
+                        </a>
+                        {% empty %}
+                        <div class="list-group-item">Нет результатов</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
